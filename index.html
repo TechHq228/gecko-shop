@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="script.js"></script>
+    <title>Gecko Store</title>
+  </head>
+  <body id="body">
+    <header>
+      <img class="logo" src="img/logo.svg" alt="Gecko logo" />
+      <img class="burger" src="img/burg.png" alt="Menu" data-visible="false" />
+      <div class="wrapper" data-visible="false">
+        <nav class="nav-bar">
+          <a class="nav-buttons" href="">Home</a>
+          <a class="nav-buttons" href="">Store</a>
+          <a class="nav-buttons" href="">Accessories</a>
+          <a class="nav-buttons" href="">Treats</a>
+          <a class="nav-buttons" href="">About</a>
+        </nav>
+        <div class="darkmode-outer" data-darkmode="false">
+          <div class="darkmode-inner" data-darkmode="false"></div>
+        </div>
+        <p>Dark Mode</p>
+      </div>
+    </header>
+    <section class="intro">
+      <div>
+        <h1>Buy Geckos Online!</h1>
+      </div>
+    </section>
+    <section class="store">
+      <div class="store-flex">
+        <figure class="store-item">
+          <img src="img/gecko1.jpg" alt="geckus cutus" />
+          <caption>
+            <p class="title">Cute little lizard</p>
+            <p class="price">$10.00</p>
+          </caption>
+          <button class="store-item-button button">Add to Cart</button>
+        </figure>
+        <figure class="store-item">
+          <img src="img/gecko2.jpg" alt="geckus cutus" />
+          <caption>
+            <p class="title">Cute funny lizard</p>
+            <p class="price">$7.99</p>
+          </caption>
+          <button class="store-item-button button">Add to Cart</button>
+        </figure>
+        <figure class="store-item">
+          <img src="img/gecko3.jpg" alt="geckus cutus" />
+          <caption>
+            <p class="title">Cute baby gecko</p>
+            <p class="price">$8.49</p>
+          </caption>
+          <button class="store-item-button button">Add to Cart</button>
+        </figure>
+        <figure class="store-item">
+          <img src="img/gecko4.jpg" alt="geckus cutus" />
+          <caption>
+            <p class="title">Handsome geckodile</p>
+            <p class="price">$12.29</p>
+          </caption>
+          <button class="store-item-button button">Add to Cart</button>
+        </figure>
+        <figure class="store-item">
+          <img src="img/gecko5.jpg" alt="geckus cutus" />
+          <caption>
+            <p class="title">Talkie gecko</p>
+            <p class="price">$19.99</p>
+          </caption>
+          <button class="store-item-button button">Add to Cart</button>
+        </figure>
+      </div>
+    </section>
+    <section class="bottom-cart" data-visible="false">
+      <p class="total">You have 0 items in cart. Total: $0</p>
+      <button class="bottom-cart-button button">Procced to checkout</button>
+      <button class="button button-remove" data-visible="false">
+        Clear Cart
+      </button>
+    </section>
+    <aside>
+      <div class="popup" data-visible="false">
+        <p>No-no-no! Why whould you need several same geckos???</p>
+        <img src="img/crosswhite.png" />
+      </div>
+    </aside>
+    <section>
+      <div class="info-section">
+        <h2>Little information about geckos!</h2>
+        <p>
+          They're are cute, they're cool, also Lorem ipsum dolor sit amet
+          consectetur adipisicing elit. Odio animi dolor delectus, dolorem
+          tempore suscipit ratione qui molestiae nihil dicta!
+        </p>
+        <img src="img/geckowink.gif" alt="gecko winking" />
+      </div>
+    </section>
+  </body>
+</html>

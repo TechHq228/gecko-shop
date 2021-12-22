@@ -1,0 +1,339 @@
+@import url("https://fonts.googleapis.com/css2?family=Balsamiq+Sans&family=Josefin+Sans&display=swap");
+
+/* font-family: 'Balsamiq Sans', cursive;
+font-family: 'Josefin Sans', sans-serif; */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  transition: 500ms;
+}
+
+img {
+  max-width: 100%;
+}
+/* === HEADER === */
+
+.logo {
+  display: block;
+  width: 8rem;
+  margin: 1rem 1rem;
+}
+
+.darkmode-outer {
+  display: inline-block;
+  position: relative;
+  width: 4rem;
+  height: 2.5rem;
+  background-color: transparent;
+  border: 0.3rem solid black;
+  border-radius: 2.5rem;
+  transition: 500ms;
+}
+
+.darkmode-inner {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: black;
+  border-radius: 50%;
+  transition: 500ms;
+}
+
+.darkmode-outer[data-darkmode="true"] {
+  background-color: black;
+}
+
+.darkmode-inner[data-darkmode="true"] {
+  transform: translateX(100%);
+  background-color: white;
+}
+
+.burger {
+  position: fixed;
+  top: 3rem;
+  right: 1.5rem;
+  width: 3rem;
+  z-index: 10;
+  /* background: rgb(255, 255, 255);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0) 75%
+  ); */
+  transition: 500ms ease-in-out;
+}
+
+.burger[data-visible="true"] {
+  transform: rotateZ(720deg);
+  width: 3rem;
+}
+
+.wrapper {
+  position: fixed;
+  display: flex;
+  z-index: 1;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  max-width: 65%;
+  background-color: rgb(121, 121, 121);
+  transform: translateX(100%);
+  transition: 500ms ease-in-out;
+}
+
+.wrapper[data-visible="true"] {
+  transform: translateX(0%);
+}
+
+.nav-bar {
+  margin-top: 6rem;
+}
+
+.nav-buttons {
+  padding: 1.3rem 1.3rem;
+  display: block;
+  text-decoration: none;
+  color: black;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1.3rem;
+  transition: 500ms;
+}
+
+.nav-buttons:hover,
+.nav-buttons:focus {
+  background-color: rgba(0, 0, 0, 0.205);
+}
+
+/* === INTRO === */
+
+.intro div {
+  background-image: url("img/introimg.webp");
+  background-size: cover;
+}
+
+.intro div h1 {
+  margin-bottom: 0;
+  padding-block: 10rem;
+  text-align: center;
+  font-family: "Balsamiq Sans", cursive;
+  font-size: 3rem;
+  color: #fff;
+}
+
+/* === STORE === */
+
+.store {
+  z-index: 10;
+  background-color: rgb(42, 126, 77);
+}
+
+/* FOR DESKTOP
+.store-flex {
+  display: flex;
+  flex-direction: row;
+}
+*/
+
+.store-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.store-item {
+  padding: 1.5rem;
+}
+
+.store-item:first-child {
+  margin-top: 0;
+  padding-top: 1rem;
+}
+
+.store-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 1rem;
+}
+
+.store-item img {
+  display: block;
+  max-width: 15rem;
+  border-radius: 10%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.301);
+}
+
+.store-item p {
+  text-align: center;
+  color: honeydew;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1.5rem;
+}
+
+.button {
+  padding: 1rem;
+  text-align: center;
+  font-family: "Josefin Sans", sans-serif;
+  background-color: rgb(255, 245, 106);
+  border-color: transparent;
+  border-radius: 5px;
+  transition: 500ms ease;
+}
+
+.button:hover {
+  background-color: honeydew;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.301);
+}
+
+.store-item-button {
+  margin: auto;
+  display: block;
+}
+
+/*
+.store-item-button:focus::after {
+  content: " ✓";
+}
+
+/* === BOTTOM CART === */
+
+.bottom-cart {
+  display: none;
+  position: sticky;
+  overflow: hidden;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: auto;
+  text-align: center;
+  background-color: rgba(0, 250, 133, 0.459);
+  backdrop-filter: blur(10px);
+  /* transition: 500ms ease-in-out; */
+}
+
+.bottom-cart[data-visible="true"] {
+  height: initial;
+}
+
+.bottom-cart p {
+  display: block;
+  margin: auto;
+  padding: 0.2rem;
+  color: honeydew;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.bottom-cart-button {
+  display: inline-block;
+  width: 65%;
+  margin-bottom: 1rem;
+}
+
+.button-remove {
+  /* display: none; */
+  margin: auto;
+  margin-top: 1rem;
+  background-color: rgb(216, 102, 102);
+}
+
+.button-remove[data-visible="true"] {
+  display: inline-block;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart-item img {
+  width: 3rem;
+  margin: 1rem;
+  border-radius: 10%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.301);
+}
+
+.cart-item p {
+  font-size: 0.8rem;
+  text-shadow: 1px 1px 1px rgb(78, 78, 78);
+}
+
+.quantity {
+  margin: 0 1rem;
+  width: 2.5rem;
+  background-color: rgb(253, 255, 125);
+  border: none;
+  outline: 1px solid rgb(107, 107, 107);
+  border-radius: 10%;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.quantity:focus {
+  outline: none;
+}
+
+/* === POPUP === */
+
+.popup {
+  top: 8rem;
+  left: 3rem;
+  right: 3rem;
+  position: fixed;
+  z-index: 40;
+  display: none;
+  height: 90%;
+  width: 70%;
+  max-width: 80vw;
+  max-height: 60vh;
+  background-color: rgb(0, 117, 39);
+  border: 5px solid rgb(141, 0, 0);
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1.5rem;
+}
+
+.popup p {
+  padding: 1rem;
+}
+
+.popup img {
+  top: 2rem;
+  right: 2rem;
+  position: absolute;
+  width: 3rem;
+}
+
+.popup[data-visible="true"] {
+  display: flex;
+}
+
+/* === LITTLE INFO SECTION === */
+
+.info-section {
+  background-color: darkgreen;
+  color: honeydew;
+  padding: 1rem;
+}
+
+.info-section h2 {
+  font-family: "Balsamiq Sans", cursive;
+  font-size: 2rem;
+}
+
+.info-section p {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1rem;
+}
