@@ -1,5 +1,4 @@
 // DARKMODE
-
 const outerSlider = document.querySelector(".darkmode-outer");
 const innerSlider = document.querySelector(".darkmode-inner");
 
@@ -59,7 +58,6 @@ function addToCart(event) {
     var imgSource = shopItem.children[0].getAttribute("src");
     var quantityElement = document.getElementsByClassName("quantity")
     addItem(title, price, imgSource);
-    totalCheck()
     quantityCheck(quantityElement)
 }
 
@@ -69,16 +67,7 @@ function addItem(title, price, imgSource) {
     var cartItems = document.getElementsByClassName("cart-item")
     for (i = 0; i < cartItems.length; i++) {
         if (cartItems[i].querySelector(".cart-item-title").innerText === title) {
-        /* var popup = document.querySelector(".popup")
-        var popupRemove = document.querySelector(".popup img")
-        popup.getAttribute("data-visible")
-        popup.setAttribute("data-visible", true)
-        popupRemove.addEventListener('click', () => {
-        popup.setAttribute("data-visible", false)
-        }) */
-        
         cartItems[i].querySelector(".quantity").value++
-        console.log(cartItems[i].querySelector(".quantity").value)
         totalCheck()
         return;
         }
@@ -89,6 +78,7 @@ function addItem(title, price, imgSource) {
     <span><p class="cart-item-price">$${price}</p></span>
     <span><input class="quantity" type="number" value="1" min="1"></span>
   </div>`)
+  totalCheck()
 }
 
 // CHECK TOTAL
@@ -107,27 +97,26 @@ function totalCheck() {
     var totalElement = document.querySelector(".total")
     var quantityElement = document.getElementsByClassName("quantity")
     var total = 0
+    var totalItems = 0
     
     for (i = 0; i < cartLength; i++) {
         var cartItem = cartItems[i];
         var priceElement = cartItem.getElementsByTagName("p")[1]
         var price = parseFloat(priceElement.innerText.replace("$", ""))
-        quantity = parseInt(quantityElement[i].value)
+        quantity = parseFloat(quantityElement[i].value)
         if (quantity === 0) {
             quantity = 1;
             quantityElement[i].value = 1;
         }
         total = total + price * quantity
-        quantity = quantity++
-        console.log(quantityElement[i].value)
-        console.log(quantity)
+        totalItems = totalItems + quantity
     }
     total = Math.round(total * 100) / 100
  
-    if (cartLength === 1) {
-        totalElement.innerText = `You have ${cartLength} item in cart. Total: $${total}`
+    if (totalItems === 1) {
+        totalElement.innerText = `You have ${totalItems} item in cart. Total: $${total}`
         } else {
-        totalElement.innerText = `You have ${cartLength} items in cart. Total: $${total}`
+        totalElement.innerText = `You have ${totalItems} items in cart. Total: $${total}`
     }
     
 }
@@ -137,4 +126,3 @@ $(".button-remove").click(function() {
     $("div").remove(".cart-item");
 });
 
-// QUANTITY CHECK

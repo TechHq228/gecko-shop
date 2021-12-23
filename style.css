@@ -19,6 +19,78 @@ img {
 /* === HEADER === */
 
 .logo {
+  display: inline-block;
+  width: 8rem;
+  margin: 1rem 2rem;
+}
+
+.burger {
+  display: none;
+}
+
+.darkmode-outer {
+  display: inline-block;
+  position: relative;
+  width: 4rem;
+  height: 2.5rem;
+  background-color: transparent;
+  border: 0.3rem solid black;
+  border-radius: 2.5rem;
+  transform: translateY(0.7rem);
+  transition: 500ms;
+}
+
+.darkmode-inner {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: black;
+  border-radius: 50%;
+  transition: 500ms;
+}
+
+.darkmode-outer[data-darkmode="true"] {
+  background-color: black;
+}
+
+.darkmode-inner[data-darkmode="true"] {
+  transform: translateX(100%);
+  background-color: white;
+}
+
+.wrapper {
+  display: inline;
+  float: right;
+  margin: 2.8rem 3rem;
+  margin-bottom: 0;
+}
+
+.wrapper p {
+  display: none;
+}
+
+.nav-bar {
+  display: inline-block;
+}
+
+.nav-buttons {
+  padding: 1.3rem 1.3rem;
+  display: inline-block;
+  text-decoration: none;
+  color: black;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1.3rem;
+  transition: 500ms;
+}
+
+.nav-buttons:hover,
+.nav-buttons:focus {
+  background-color: rgba(0, 0, 0, 0.205);
+}
+
+/* .logo {
   display: block;
   width: 8rem;
   margin: 1rem 1rem;
@@ -61,12 +133,6 @@ img {
   right: 1.5rem;
   width: 3rem;
   z-index: 10;
-  /* background: rgb(255, 255, 255);
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.5) 0%,
-    rgba(255, 255, 255, 0) 75%
-  ); */
   transition: 500ms ease-in-out;
 }
 
@@ -113,6 +179,101 @@ img {
 .nav-buttons:hover,
 .nav-buttons:focus {
   background-color: rgba(0, 0, 0, 0.205);
+} */
+
+@media (max-width: 60rem) {
+  .logo {
+    display: block;
+    width: 8rem;
+    margin: 1rem 1rem;
+  }
+
+  .darkmode-outer {
+    display: inline-block;
+    position: relative;
+    width: 4rem;
+    height: 2.5rem;
+    background-color: transparent;
+    border: 0.3rem solid black;
+    border-radius: 2.5rem;
+    transition: 500ms;
+  }
+
+  .darkmode-inner {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: black;
+    border-radius: 50%;
+    transition: 500ms;
+  }
+
+  .darkmode-outer[data-darkmode="true"] {
+    background-color: black;
+  }
+
+  .darkmode-inner[data-darkmode="true"] {
+    transform: translateX(100%);
+    background-color: white;
+  }
+
+  .burger {
+    display: initial;
+    position: fixed;
+    top: 3rem;
+    right: 1.5rem;
+    width: 3rem;
+    z-index: 10;
+    transition: 500ms ease-in-out;
+  }
+
+  .burger[data-visible="true"] {
+    transform: rotateZ(720deg);
+    width: 3rem;
+  }
+
+  .wrapper {
+    position: fixed;
+    display: flex;
+    margin: initial;
+    z-index: 1;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    max-width: 65%;
+    background-color: rgb(121, 121, 121);
+    transform: translateX(100%);
+    transition: 500ms ease-in-out;
+  }
+
+  .wrapper[data-visible="true"] {
+    transform: translateX(0%);
+  }
+
+  .nav-bar {
+    margin-top: 6rem;
+  }
+
+  .nav-buttons {
+    padding: 1.3rem 1.3rem;
+    display: block;
+    text-decoration: none;
+    color: black;
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 1.3rem;
+    transition: 500ms;
+  }
+
+  .nav-buttons:hover,
+  .nav-buttons:focus {
+    background-color: rgba(0, 0, 0, 0.205);
+  }
 }
 
 /* === INTRO === */
@@ -120,15 +281,24 @@ img {
 .intro div {
   background-image: url("img/introimg.webp");
   background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .intro div h1 {
+  margin-top: 0;
   margin-bottom: 0;
   padding-block: 10rem;
   text-align: center;
   font-family: "Balsamiq Sans", cursive;
   font-size: 3rem;
   color: #fff;
+}
+
+@media (min-width: 60rem) {
+  .intro div {
+    background-repeat: no-repeat;
+    background-position: center -150px;
+  }
 }
 
 /* === STORE === */
@@ -169,6 +339,7 @@ img {
 .store-item img {
   display: block;
   max-width: 15rem;
+  height: 15rem;
   border-radius: 10%;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.301);
 }
@@ -198,6 +369,23 @@ img {
 .store-item-button {
   margin: auto;
   display: block;
+}
+
+@media (min-width: 60rem) {
+  .store-flex {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+  .store-item:first-child {
+    margin-top: 1rem;
+    padding-top: 1.5rem;
+  }
+
+  .store-item:last-child {
+    margin-bottom: 1rem;
+    padding-bottom: 1.5rem;
+  }
 }
 
 /*
@@ -276,48 +464,18 @@ img {
   outline: 1px solid rgb(107, 107, 107);
   border-radius: 10%;
   font-family: "Josefin Sans", sans-serif;
+  text-align: center;
 }
 
 .quantity:focus {
   outline: none;
 }
 
-/* === POPUP === */
-
-.popup {
-  top: 8rem;
-  left: 3rem;
-  right: 3rem;
-  position: fixed;
-  z-index: 40;
-  display: none;
-  height: 90%;
-  width: 70%;
-  max-width: 80vw;
-  max-height: 60vh;
-  background-color: rgb(0, 117, 39);
-  border: 5px solid rgb(141, 0, 0);
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-family: "Josefin Sans", sans-serif;
-  font-size: 1.5rem;
-}
-
-.popup p {
-  padding: 1rem;
-}
-
-.popup img {
-  top: 2rem;
-  right: 2rem;
-  position: absolute;
-  width: 3rem;
-}
-
-.popup[data-visible="true"] {
-  display: flex;
+@media (min-width: 60rem) {
+  .cart-item {
+    display: inline-block;
+    padding: 1rem;
+  }
 }
 
 /* === LITTLE INFO SECTION === */
@@ -336,4 +494,52 @@ img {
 .info-section p {
   font-family: "Josefin Sans", sans-serif;
   font-size: 1rem;
+}
+
+/* === FOOTER === */
+
+footer {
+  background-color: #232323;
+  text-align: center;
+  color: honeydew;
+}
+
+.disclaimer {
+  margin: 0;
+  font-family: "Balsamiq Sans", cursive;
+  padding: 2rem;
+  padding-bottom: 0;
+}
+
+.footer-text {
+  margin: 0;
+  font-family: "Josefin Sans", sans-serif;
+  padding: 2rem;
+  /* padding-top: 0; */
+}
+
+footer nav {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+footer a {
+  /* display: flex;
+  justify-content: center; */
+  text-decoration: none;
+  font-family: "Balsamiq Sans", cursive;
+  color: honeydew;
+  text-transform: uppercase;
+  padding: 1rem;
+}
+
+footer a:hover {
+  text-decoration-line: underline;
+}
+
+@media (min-width: 60rem) {
+  footer nav {
+    flex-direction: row;
+  }
 }
