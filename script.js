@@ -12,7 +12,7 @@ outerSlider.addEventListener('click', () => {
     } else {
         outerSlider.setAttribute("data-darkmode", false);
         innerSlider.setAttribute("data-darkmode", false);
-        document.querySelector("body").style.background = "#fff";
+        document.querySelector("body").style.background = "var(--clr-blue)";
     }
 });
 
@@ -59,6 +59,7 @@ function addToCart(event) {
     var quantityElement = document.getElementsByClassName("quantity")
     addItem(title, price, imgSource);
     quantityCheck(quantityElement)
+    totalCheck()
 }
 
 // GET DATA FOR ITEM
@@ -68,7 +69,7 @@ function addItem(title, price, imgSource) {
     for (i = 0; i < cartItems.length; i++) {
         if (cartItems[i].querySelector(".cart-item-title").innerText === title) {
         cartItems[i].querySelector(".quantity").value++
-        totalCheck()
+        // totalCheck()
         return;
         }
     }
@@ -76,20 +77,27 @@ function addItem(title, price, imgSource) {
     <span><img src="${imgSource}" /></span>
     <span><p class="cart-item-title">${title}</p></span>
     <span><p class="cart-item-price">$${price}</p></span>
-    <span><input class="quantity" type="number" value="1" min="1"></span>
+    <span><div class="button button-minus">-</div><input class="quantity" type="number" value="1" min="1"><div class="button button-plus">+</div></span>
   </div>`)
-  totalCheck()
+//   totalCheck()
 }
 
 // CHECK TOTAL
 
 function quantityCheck(quantityElement) {
+
 for (i = 0; i < quantityElement.length; i++) {
+        
+
     quantityElement[i].addEventListener('change', () => {
+        
         totalCheck()
     })
 }
 }
+
+
+
 
 function totalCheck() {
     var cartItems = document.getElementsByClassName("cart-item")
@@ -103,14 +111,22 @@ function totalCheck() {
         var cartItem = cartItems[i];
         var priceElement = cartItem.getElementsByTagName("p")[1]
         var price = parseFloat(priceElement.innerText.replace("$", ""))
-        quantity = parseFloat(quantityElement[i].value)
-        if (quantity === 0) {
+        quantity = parseInt(quantityElement[i].value)
+        console.log(quantityElement[i].value, quantity)
+
+        
+
+        if (quantity <= 0) {
             quantity = 1;
             quantityElement[i].value = 1;
         }
         total = total + price * quantity
         totalItems = totalItems + quantity
+
+        
+       
     }
+    newFunction(cartItem, cartLength);
     total = Math.round(total * 100) / 100
  
     if (totalItems === 1) {
@@ -126,3 +142,21 @@ $(".button-remove").click(function() {
     $("div").remove(".cart-item");
 });
 
+
+
+// PLUS MINUS 
+
+function newFunction(cartItem, cartLength) {
+    var minusButton = cartItem.getElementsByClassName("button-minus")[0];
+    var plusButton = cartItem.getElementsByClassName("button-plus")[0];
+
+    minusButton.addEventListener('click', () => {
+            var minusValue = parseInt(cartItem.querySelector(".quantity").value);
+            minusValue--
+    });
+    plusButton.addEventListener('click', () => {
+            var plusValue = parseInt(cartItem.querySelector(".quantity").value);
+            plusValue++
+            console.log(plusValue)
+    });
+}
