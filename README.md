@@ -8,13 +8,13 @@ A little website WIP, simple shop
 
 - [x] Design approx layout
 - [ ] Add more sections
-- [ ] Add "-" and "+" buttons before and after the cart input respectfully
+- [x] Add "-" and "+" buttons before and after the cart input respectfully
 
 ### CSS
 
 - [x] Hover effects
 - [x] Responsive
-- [ ] Complete design colorwise
+- [x] Complete design colorwise
 - [ ] Make it look pretty
 
 ### Script
@@ -23,4 +23,8 @@ A little website WIP, simple shop
 - [x] Dark mode (partially)
 - [x] Working cart
 - [x] Make cart actually count ALL items, not just item rows
-- [ ] Make "-" and "+" do its work
+- [x] Make "-" and "+" do its work
+
+### Backend
+
+- [ ] Connect Stripe

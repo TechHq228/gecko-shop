@@ -8,11 +8,11 @@ outerSlider.addEventListener('click', () => {
     if (onOff === "false") {
         outerSlider.setAttribute("data-darkmode", true);
         innerSlider.setAttribute("data-darkmode", true);
-        document.querySelector("body").style.background = "#232323";
+        document.querySelector("body").style.background = "var(--clr-green-darkest)";
     } else {
         outerSlider.setAttribute("data-darkmode", false);
         innerSlider.setAttribute("data-darkmode", false);
-        document.querySelector("body").style.background = "var(--clr-blue)";
+        document.querySelector("body").style.background = "var(--clr-green-dark)";
     }
 });
 
@@ -56,20 +56,23 @@ function addToCart(event) {
     var stringPrice = shopItem.getElementsByClassName("price")[0].innerText;
     var price = parseFloat(stringPrice.replace(`$`, ``))
     var imgSource = shopItem.children[0].getAttribute("src");
+    var cartItems = document.getElementsByClassName("cart-item")
     var quantityElement = document.getElementsByClassName("quantity")
-    addItem(title, price, imgSource);
+    addItem(title, price, imgSource, cartItems, quantityElement);
     quantityCheck(quantityElement)
     totalCheck()
+    buttonAnim()
+    doNotTakeHalf()
 }
 
 // GET DATA FOR ITEM
 
-function addItem(title, price, imgSource) {
-    var cartItems = document.getElementsByClassName("cart-item")
+function addItem(title, price, imgSource, cartItems, quantityElement) {
     for (i = 0; i < cartItems.length; i++) {
         if (cartItems[i].querySelector(".cart-item-title").innerText === title) {
-        cartItems[i].querySelector(".quantity").value++
-        // totalCheck()
+            // alert("Item is already in the cart, use '-' and '+' to adjust quantity")
+            cartItems[i].querySelector(".quantity").value++
+            // totalCheck()
         return;
         }
     }
@@ -80,11 +83,14 @@ function addItem(title, price, imgSource) {
     <span><div class="button button-minus">-</div><input class="quantity" type="number" value="1" min="1"><div class="button button-plus">+</div></span>
   </div>`)
 //   totalCheck()
+plusMinus(cartItems, quantityElement)
+
 }
 
 // CHECK TOTAL
 
 function quantityCheck(quantityElement) {
+   
 
 for (i = 0; i < quantityElement.length; i++) {
         
@@ -114,9 +120,7 @@ function totalCheck() {
         quantity = parseInt(quantityElement[i].value)
         console.log(quantityElement[i].value, quantity)
 
-        
-
-        if (quantity <= 0) {
+        if (quantity <= 0 || quantityElement[i].value <= 0) {
             quantity = 1;
             quantityElement[i].value = 1;
         }
@@ -124,9 +128,7 @@ function totalCheck() {
         totalItems = totalItems + quantity
 
         
-       
     }
-    newFunction(cartItem, cartLength);
     total = Math.round(total * 100) / 100
  
     if (totalItems === 1) {
@@ -137,26 +139,55 @@ function totalCheck() {
     
 }
 
+// CLEAR CART
+
 $(".button-remove").click(function() {
-    $(".bottom-cart").fadeOut(300);
-    $("div").remove(".cart-item");
+    $(".bottom-cart").slideUp(500);
+    setTimeout(function() {$("div").remove(".cart-item")}, 500) 
+
 });
 
 
 
 // PLUS MINUS 
 
-function newFunction(cartItem, cartLength) {
-    var minusButton = cartItem.getElementsByClassName("button-minus")[0];
-    var plusButton = cartItem.getElementsByClassName("button-plus")[0];
+function plusMinus(cartItems, quantityElement) {
+// var cartItems = document.getElementsByClassName("cart-item")
 
-    minusButton.addEventListener('click', () => {
-            var minusValue = parseInt(cartItem.querySelector(".quantity").value);
-            minusValue--
-    });
-    plusButton.addEventListener('click', () => {
-            var plusValue = parseInt(cartItem.querySelector(".quantity").value);
-            plusValue++
-            console.log(plusValue)
-    });
+    for (var i = 0; i < quantityElement.length; i++) {
+        var cartItem = cartItems[i]
+        var quantityElement = cartItem.getElementsByClassName("quantity")[0]
+        var minusButton = cartItem.getElementsByClassName("button-minus")[0];
+        var plusButton = cartItem.getElementsByClassName("button-plus")[0];
+
+        minusButton.addEventListener('click', () => {
+            quantityElement.value--
+            totalCheck()
+        });
+        plusButton.addEventListener('click', () => {
+            quantityElement.value++
+            totalCheck()
+        });
+    }
+}
+
+// BUTTON ANIM
+
+function buttonAnim() {
+$(".button").click(function() {
+    $(this).addClass("buttonAnim")
+    setTimeout(function() {$(".button").removeClass("buttonAnim")}, 200)
+})
+}
+
+// BOTTOM CART DO NOT TAKE HALF OF SCREEN!!!
+
+function doNotTakeHalf() {
+    var cartItself = document.querySelectorAll(".bottom-cart")[0]
+if (cartItself.clientHeight > 300) {
+    cartItself.style.position = "static"
+    cartItself.scrollIntoView({behavior: "smooth", block: "center"})
+} else {
+    cartItself.style.position = "sticky"
+}
 }
