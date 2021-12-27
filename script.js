@@ -141,12 +141,14 @@ function totalCheck() {
 
 // CLEAR CART
 
+clearCart()
+function clearCart() {
 $(".button-remove").click(function() {
     $(".bottom-cart").slideUp(500);
     setTimeout(function() {$("div").remove(".cart-item")}, 500) 
 
 });
-
+}
 
 
 // PLUS MINUS 
@@ -190,4 +192,17 @@ if (cartItself.clientHeight > 300) {
 } else {
     cartItself.style.position = "sticky"
 }
+}
+
+// CHECKOUT
+
+checkout()
+function checkout() {
+    var buttonCheckout = document.querySelector(".bottom-cart-button")
+    buttonCheckout.addEventListener('click', () => {
+        alert("Thank you for your purchase!")
+        $(".bottom-cart").slideUp(500);
+        setTimeout(function() {$("div").remove(".cart-item")}, 500)
+    })
+    
 }

@@ -22,6 +22,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   overflow-x: hidden;
@@ -290,9 +294,20 @@ img {
   background-color: rgb(255, 245, 106);
   border-color: transparent;
   border-radius: 5px;
-  transition: 500ms ease;
   text-transform: uppercase;
   font-weight: 600;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  -webkit-font-smoothing: subpixel-antialiased;
+  transition: 500ms ease;
+  -webkit-transition: 500ms ease;
+  -moz-transition: 500ms ease;
+  -ms-transition: 500ms ease;
+  -o-transition: 500ms ease;
 }
 
 .buttonAnim {
