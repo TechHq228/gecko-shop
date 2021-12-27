@@ -229,8 +229,21 @@ var stripeHandler = StripeCheckout.configure({
             })
         }).then(function(res) {
             return res.json()
-        }).then(function(data) {
-            alert(data.message)
+        }).then(function(/* data */) {
+            // alert(data.message)
+            $("body").append(`<div class="purchase-complete">
+            <div>
+              <h2>Thank you for your purchase!</h2>
+              <p>
+                Payment details have been sent to your E-mail and we're preparing your
+                geckos for safe transfer!
+              </p>
+            </div>
+          </div>`)
+            $(".purchase-complete").show(500);
+            setTimeout(function() {
+                $(".purchase-complete").hide(500, "linear", $(this).remove())
+            }, 5000)
             $(".bottom-cart").slideUp(500);
             setTimeout(function() {$("div").remove(".cart-item")}, 500)
             totalCheck()
