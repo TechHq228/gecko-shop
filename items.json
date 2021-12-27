@@ -1,0 +1,34 @@
+{
+  "geckos": [
+    {
+      "id": 1,
+      "name": "Cute little lizard",
+      "price": 1000,
+      "imgName": "gecko1.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Cute funny lizard",
+      "price": 799,
+      "imgName": "gecko2.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Cute baby gecko",
+      "price": 849,
+      "imgName": "gecko3.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Handsome geckodile",
+      "price": 1229,
+      "imgName": "gecko4.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Talkie gecko",
+      "price": 1999,
+      "imgName": "gecko5.jpg"
+    }
+  ]
+}

@@ -58,16 +58,19 @@ function addToCart(event) {
     var imgSource = shopItem.children[0].getAttribute("src");
     var cartItems = document.getElementsByClassName("cart-item")
     var quantityElement = document.getElementsByClassName("quantity")
-    addItem(title, price, imgSource, cartItems, quantityElement);
+    var id = shopItem.dataset.itemId
+    addItem(title, price, imgSource, cartItems, quantityElement, id);
     quantityCheck(quantityElement)
     totalCheck()
     buttonAnim()
     doNotTakeHalf()
+    // testing()
+    
 }
 
 // GET DATA FOR ITEM
 
-function addItem(title, price, imgSource, cartItems, quantityElement) {
+function addItem(title, price, imgSource, cartItems, quantityElement, id) {
     for (i = 0; i < cartItems.length; i++) {
         if (cartItems[i].querySelector(".cart-item-title").innerText === title) {
             // alert("Item is already in the cart, use '-' and '+' to adjust quantity")
@@ -76,7 +79,7 @@ function addItem(title, price, imgSource, cartItems, quantityElement) {
         return;
         }
     }
-    $(".bottom-cart").prepend(`<div class="cart-item">
+    $(".bottom-cart").prepend(`<div class="cart-item" data-item-id="${id}">
     <span><img src="${imgSource}" /></span>
     <span><p class="cart-item-title">${title}</p></span>
     <span><p class="cart-item-price">$${price}</p></span>
@@ -118,18 +121,17 @@ function totalCheck() {
         var priceElement = cartItem.getElementsByTagName("p")[1]
         var price = parseFloat(priceElement.innerText.replace("$", ""))
         quantity = parseInt(quantityElement[i].value)
-        console.log(quantityElement[i].value, quantity)
 
         if (quantity <= 0 || quantityElement[i].value <= 0) {
             quantity = 1;
             quantityElement[i].value = 1;
         }
-        total = total + price * quantity
+        var total = total + (price * quantity)
         totalItems = totalItems + quantity
 
         
     }
-    total = Math.round(total * 100) / 100
+    var total = Math.round(total * 100) / 100
  
     if (totalItems === 1) {
         totalElement.innerText = `You have ${totalItems} item in cart. Total: $${total}`
@@ -194,15 +196,82 @@ if (cartItself.clientHeight > 300) {
 }
 }
 
-// CHECKOUT
+// STRIPE 
 
+var stripeHandler = StripeCheckout.configure({
+    key: stripePublicKey,
+    locale: 'en',
+    token: function(token) {
+        var items = []
+        var cartItemContainer = document.getElementsByClassName('bottom-cart')[0]
+        var cartItems = cartItemContainer.getElementsByClassName('cart-item')
+        for (var i = 0; i < cartItems.length; i++) {
+            var cartItem = cartItems[i]
+            var quantityElement = cartItem.getElementsByClassName('quantity')[0]
+            var quantity = quantityElement.value
+            var id = cartItem.dataset.itemId
+            // console.log(quantity)
+            items.push({
+                id: id,
+                quantity: quantity
+            })
+        }
+
+        fetch('/purchase', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                stripeTokenId: token.id,
+                items: items
+            })
+        }).then(function(res) {
+            return res.json()
+        }).then(function(data) {
+            alert(data.message)
+            $(".bottom-cart").slideUp(500);
+            setTimeout(function() {$("div").remove(".cart-item")}, 500)
+            totalCheck()
+        }).catch(function(error) {
+            console.error(error)
+        })
+    }
+})
+
+// CHECKOUT
 checkout()
 function checkout() {
     var buttonCheckout = document.querySelector(".bottom-cart-button")
     buttonCheckout.addEventListener('click', () => {
-        alert("Thank you for your purchase!")
-        $(".bottom-cart").slideUp(500);
-        setTimeout(function() {$("div").remove(".cart-item")}, 500)
+        const regex = /[^$]*$/g
+        var totalPrice = document.getElementsByClassName("total")[0].innerText
+        totalP = totalPrice.match(regex)[0]
+        var price = parseFloat(totalP) * 100
+        stripeHandler.open({
+            amount: price
     })
-    
+        // alert("Thank you for your purchase!")
+        // $(".bottom-cart").slideUp(500);
+        // setTimeout(function() {$("div").remove(".cart-item")}, 500)
+    })
 }
+
+/* function testing() {
+var items = []
+        var cartItemContainer = document.getElementsByClassName('bottom-cart')[0]
+        var cartItems = cartItemContainer.getElementsByClassName('cart-item')
+        for (var i = 0; i < cartItems.length; i++) {
+            var cartItem = cartItems[i]
+            var quantityElement = cartItem.getElementsByClassName('quantity')[0]
+            var quantity = quantityElement.value
+            var id = cartItem.dataset.itemId
+            
+            items.push({
+                id: id,
+                quantity: quantity
+            })
+            console.log(quantity, id, items)
+        }
+        } */

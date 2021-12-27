@@ -7,8 +7,9 @@ A little website WIP, simple shop
 ### HTML
 
 - [x] Design approx layout
-- [ ] Add more sections
 - [x] Add "-" and "+" buttons before and after the cart input respectfully
+- [ ] Add more sections
+- [ ] Homepage is kinda needed
 
 ### CSS
 
@@ -16,6 +17,7 @@ A little website WIP, simple shop
 - [x] Responsive
 - [x] Complete design colorwise
 - [ ] Make it look pretty
+- [ ] Homepage gotta be _fancy_
 
 ### Script
 
@@ -27,4 +29,5 @@ A little website WIP, simple shop
 
 ### Backend
 
-- [ ] Connect Stripe
+- [x] Connect Stripe
+- [ ] Apply ^ to all pages i.e. Accessories, Treats

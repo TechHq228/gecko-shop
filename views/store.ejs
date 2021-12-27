@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://checkout.stripe.com/checkout.js" defer></script>
+    <script
+      defer
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+    ></script>
+    <script defer src="script.js"></script>
+
+    <script>
+      var stripePublicKey = "<%= stripePublicKey %>";
+    </script>
+    <title>Gecko Store</title>
+  </head>
+  <body id="body">
+    <header>
+      <img class="logo" src="img/logo.svg" alt="Gecko logo" />
+      <img class="burger" src="img/burg.png" alt="Menu" data-visible="false" />
+      <div class="wrapper" data-visible="false">
+        <nav class="nav-bar">
+          <a class="nav-buttons" href="index.html">Home</a>
+          <a class="nav-buttons" href="/store">Store</a>
+          <a class="nav-buttons" href="">Accessories</a>
+          <a class="nav-buttons" href="">Treats</a>
+          <a class="nav-buttons" href="">About</a>
+        </nav>
+        <div class="darkmode-outer" data-darkmode="false">
+          <div class="darkmode-inner" data-darkmode="false"></div>
+        </div>
+        <p>Dark Mode</p>
+      </div>
+    </header>
+    <section class="intro">
+      <div>
+        <h1>Buy Geckos Online!</h1>
+      </div>
+    </section>
+    <section class="store">
+      <div class="store-flex">
+        <% items.geckos.forEach(function(item){ %>
+        <figure class="store-item" data-item-id="<%= item.id %>">
+          <img src="img/<%= item.imgName %>" alt="geckus cutus" />
+          <caption>
+            <p class="title"><%= item.name %></p>
+            <p class="price">$<%= item.price / 100 %></p>
+          </caption>
+          <button class="store-item-button button">Add to Cart</button>
+        </figure>
+        <% }) %>
+      </div>
+    </section>
+    <section class="bottom-cart" data-visible="false">
+      <p class="total">You have 0 items in cart. Total:</p>
+      <button class="bottom-cart-button button">Procced to checkout</button>
+      <button class="button button-remove" data-visible="false">
+        Clear Cart
+      </button>
+    </section>
+    <section>
+      <div class="info-section">
+        <h2>Little information about geckos!</h2>
+        <p>
+          They're are cute, they're cool, also Lorem ipsum dolor sit amet
+          consectetur adipisicing elit. Odio animi dolor delectus, dolorem
+          tempore suscipit ratione qui molestiae nihil dicta!
+        </p>
+        <img src="img/geckowink.gif" alt="gecko winking" />
+      </div>
+    </section>
+    <footer>
+      <div>
+        <p class="disclaimer">DISCLAIMER</p>
+        <p class="footer-text">
+          All animals, geckos in our case, are treated on the highest level
+          possible, we try out best to make the artificial environment resemble
+          as close as the natural one. All geckos are held in big terrariums,
+          separated on species basis. Sometimes we allow them walk into the BIG
+          terrarium for some interspecies communcication.
+        </p>
+      </div>
+      <nav class="footer">
+        <a href="">Conditions</a>
+        <a href="">History</a>
+        <a href="">Join us</a>
+        <a href="">Contact us</a>
+      </nav>
+    </footer>
+  </body>
+</html>
