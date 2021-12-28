@@ -9,10 +9,12 @@ outerSlider.addEventListener('click', () => {
         outerSlider.setAttribute("data-darkmode", true);
         innerSlider.setAttribute("data-darkmode", true);
         document.querySelector("body").style.background = "var(--clr-green-darkest)";
+        // document.querySelector(".wrapper").style.background = "var(--clr-green-dark)";
     } else {
         outerSlider.setAttribute("data-darkmode", false);
         innerSlider.setAttribute("data-darkmode", false);
         document.querySelector("body").style.background = "var(--clr-green-dark)";
+        // document.querySelector(".wrapper").style.background = "var(--clr-green-light)";
     }
 });
 
@@ -44,26 +46,26 @@ var buttonAdd = document.getElementsByClassName("store-item-button");
 var storeItem = document.getElementsByClassName("store-item");
 
 for (var i = 0; i < buttonAdd.length; i++) {
-    var buttonAddItem = buttonAdd[i]
+    var buttonAddItem = buttonAdd[i];
     buttonAddItem.addEventListener('click', addToCart) 
 }
 
 function addToCart(event) {
     $(".bottom-cart").fadeIn(300);
-    var buttonAddItem = event.target
-    var shopItem = buttonAddItem.parentElement
+    var buttonAddItem = event.target;
+    var shopItem = buttonAddItem.parentElement;
     var title = shopItem.getElementsByClassName("title")[0].innerText;
     var stringPrice = shopItem.getElementsByClassName("price")[0].innerText;
-    var price = parseFloat(stringPrice.replace(`$`, ``))
+    var price = parseFloat(stringPrice.replace(`$`, ``));
     var imgSource = shopItem.children[0].getAttribute("src");
-    var cartItems = document.getElementsByClassName("cart-item")
-    var quantityElement = document.getElementsByClassName("quantity")
-    var id = shopItem.dataset.itemId
+    var cartItems = document.getElementsByClassName("cart-item");
+    var quantityElement = document.getElementsByClassName("quantity");
+    var id = shopItem.dataset.itemId;
     addItem(title, price, imgSource, cartItems, quantityElement, id);
-    quantityCheck(quantityElement)
-    totalCheck()
-    buttonAnim()
-    doNotTakeHalf()
+    quantityCheck(quantityElement);
+    totalCheck();
+    buttonAnim();
+    doNotTakeHalf();
     // testing()
     
 }
@@ -74,9 +76,9 @@ function addItem(title, price, imgSource, cartItems, quantityElement, id) {
     for (i = 0; i < cartItems.length; i++) {
         if (cartItems[i].querySelector(".cart-item-title").innerText === title) {
             // alert("Item is already in the cart, use '-' and '+' to adjust quantity")
-            cartItems[i].querySelector(".quantity").value++
+            cartItems[i].querySelector(".quantity").value++;
             // totalCheck()
-        return;
+            return;
         }
     }
     $(".bottom-cart").prepend(`<div class="cart-item" data-item-id="${id}">
@@ -84,7 +86,7 @@ function addItem(title, price, imgSource, cartItems, quantityElement, id) {
     <span><p class="cart-item-title">${title}</p></span>
     <span><p class="cart-item-price">$${price}</p></span>
     <span><div class="button button-minus">-</div><input class="quantity" type="number" value="1" min="1"><div class="button button-plus">+</div></span>
-  </div>`)
+  </div>`);
 //   totalCheck()
 plusMinus(cartItems, quantityElement)
 
@@ -105,33 +107,30 @@ for (i = 0; i < quantityElement.length; i++) {
 }
 }
 
-
-
-
 function totalCheck() {
-    var cartItems = document.getElementsByClassName("cart-item")
-    var cartLength = cartItems.length
-    var totalElement = document.querySelector(".total")
-    var quantityElement = document.getElementsByClassName("quantity")
-    var total = 0
-    var totalItems = 0
+    var cartItems = document.getElementsByClassName("cart-item");
+    var cartLength = cartItems.length;
+    var totalElement = document.querySelector(".total");
+    var quantityElement = document.getElementsByClassName("quantity");
+    var total = 0;
+    var totalItems = 0;
     
     for (i = 0; i < cartLength; i++) {
         var cartItem = cartItems[i];
-        var priceElement = cartItem.getElementsByTagName("p")[1]
-        var price = parseFloat(priceElement.innerText.replace("$", ""))
-        quantity = parseInt(quantityElement[i].value)
+        var priceElement = cartItem.getElementsByTagName("p")[1];
+        var price = parseFloat(priceElement.innerText.replace("$", ""));
+        quantity = parseInt(quantityElement[i].value);
 
         if (quantity <= 0 || quantityElement[i].value <= 0) {
             quantity = 1;
             quantityElement[i].value = 1;
         }
-        var total = total + (price * quantity)
-        totalItems = totalItems + quantity
+        var total = total + (price * quantity);
+        totalItems = totalItems + quantity;
 
         
     }
-    var total = Math.round(total * 100) / 100
+    var total = Math.round(total * 100) / 100;
  
     if (totalItems === 1) {
         totalElement.innerText = `You have ${totalItems} item in cart. Total: $${total}`
@@ -143,13 +142,13 @@ function totalCheck() {
 
 // CLEAR CART
 
-clearCart()
+clearCart();
 function clearCart() {
 $(".button-remove").click(function() {
     $(".bottom-cart").slideUp(500);
     setTimeout(function() {$("div").remove(".cart-item")}, 500) 
 
-});
+})
 }
 
 
@@ -159,17 +158,17 @@ function plusMinus(cartItems, quantityElement) {
 // var cartItems = document.getElementsByClassName("cart-item")
 
     for (var i = 0; i < quantityElement.length; i++) {
-        var cartItem = cartItems[i]
-        var quantityElement = cartItem.getElementsByClassName("quantity")[0]
+        var cartItem = cartItems[i];
+        var quantityElement = cartItem.getElementsByClassName("quantity")[0];
         var minusButton = cartItem.getElementsByClassName("button-minus")[0];
         var plusButton = cartItem.getElementsByClassName("button-plus")[0];
 
         minusButton.addEventListener('click', () => {
-            quantityElement.value--
+            quantityElement.value--;
             totalCheck()
         });
         plusButton.addEventListener('click', () => {
-            quantityElement.value++
+            quantityElement.value++;
             totalCheck()
         });
     }
@@ -179,7 +178,7 @@ function plusMinus(cartItems, quantityElement) {
 
 function buttonAnim() {
 $(".button").click(function() {
-    $(this).addClass("buttonAnim")
+    $(this).addClass("buttonAnim");
     setTimeout(function() {$(".button").removeClass("buttonAnim")}, 200)
 })
 }
@@ -187,9 +186,9 @@ $(".button").click(function() {
 // BOTTOM CART DO NOT TAKE HALF OF SCREEN!!!
 
 function doNotTakeHalf() {
-    var cartItself = document.querySelectorAll(".bottom-cart")[0]
+    var cartItself = document.querySelectorAll(".bottom-cart")[0];
 if (cartItself.clientHeight > 300) {
-    cartItself.style.position = "static"
+    cartItself.style.position = "static";
     cartItself.scrollIntoView({behavior: "smooth", block: "center"})
 } else {
     cartItself.style.position = "sticky"
@@ -202,14 +201,14 @@ var stripeHandler = StripeCheckout.configure({
     key: stripePublicKey,
     locale: 'en',
     token: function(token) {
-        var items = []
-        var cartItemContainer = document.getElementsByClassName('bottom-cart')[0]
-        var cartItems = cartItemContainer.getElementsByClassName('cart-item')
+        var items = [];
+        var cartItemContainer = document.getElementsByClassName('bottom-cart')[0];
+        var cartItems = cartItemContainer.getElementsByClassName('cart-item');
         for (var i = 0; i < cartItems.length; i++) {
-            var cartItem = cartItems[i]
-            var quantityElement = cartItem.getElementsByClassName('quantity')[0]
-            var quantity = quantityElement.value
-            var id = cartItem.dataset.itemId
+            var cartItem = cartItems[i];
+            var quantityElement = cartItem.getElementsByClassName('quantity')[0];
+            var quantity = quantityElement.value;
+            var id = cartItem.dataset.itemId;
             // console.log(quantity)
             items.push({
                 id: id,
@@ -243,9 +242,9 @@ var stripeHandler = StripeCheckout.configure({
             $(".purchase-complete").show(500);
             setTimeout(function() {
                 $(".purchase-complete").hide(500, "linear", $(this).remove())
-            }, 5000)
+            }, 5000);
             $(".bottom-cart").slideUp(500);
-            setTimeout(function() {$("div").remove(".cart-item")}, 500)
+            setTimeout(function() {$("div").remove(".cart-item")}, 500);
             totalCheck()
         }).catch(function(error) {
             console.error(error)
@@ -256,18 +255,15 @@ var stripeHandler = StripeCheckout.configure({
 // CHECKOUT
 checkout()
 function checkout() {
-    var buttonCheckout = document.querySelector(".bottom-cart-button")
+    var buttonCheckout = document.querySelector(".bottom-cart-button");
     buttonCheckout.addEventListener('click', () => {
         const regex = /[^$]*$/g
-        var totalPrice = document.getElementsByClassName("total")[0].innerText
-        totalP = totalPrice.match(regex)[0]
-        var price = parseFloat(totalP) * 100
+        var totalPrice = document.getElementsByClassName("total")[0].innerText;
+        totalP = totalPrice.match(regex)[0];
+        var price = parseFloat(totalP) * 100;
         stripeHandler.open({
             amount: price
     })
-        // alert("Thank you for your purchase!")
-        // $(".bottom-cart").slideUp(500);
-        // setTimeout(function() {$("div").remove(".cart-item")}, 500)
     })
 }
 
@@ -288,3 +284,34 @@ var items = []
             console.log(quantity, id, items)
         }
         } */
+
+// STORE SWITCH
+
+switchStores()
+function switchStores() {
+    var linksTogether = document.getElementsByClassName("nav-buttons");
+    var linkStore = linksTogether[1];
+    var linkAcc = linksTogether[2];
+    var linkTreats = linksTogether[3];
+    var sectionStore = document.querySelector(".store");
+    var sectionAcc = document.querySelector(".store-misc");
+    var sectionTreats = document.querySelector(".store-treats");
+    linkStore.addEventListener('click', () => {
+        $(sectionStore).slideDown(500);
+        $(sectionAcc).slideUp(500);
+        $(sectionTreats).slideUp(500);
+        setTimeout(function() {sectionStore.scrollIntoView({behavior: "smooth"})}, 500)
+    })
+    linkAcc.addEventListener('click', () => {
+        $(sectionStore).slideUp(500);
+        $(sectionAcc).slideDown(500);
+        $(sectionTreats).slideUp(500);
+        setTimeout(function() {sectionAcc.scrollIntoView({behavior: "smooth"})}, 500)
+    })
+    linkTreats.addEventListener('click', () => {
+        $(sectionStore).slideUp(500);
+        $(sectionAcc).slideUp(500);
+        $(sectionTreats).slideDown(500);
+        setTimeout(function() {sectionTreats.scrollIntoView({behavior: "smooth"})}, 500)
+    })
+}

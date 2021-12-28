@@ -33,7 +33,7 @@ app.post('/purchase', function(req, res) {
       res.status(500).end()
     } else {
       const itemsJson = JSON.parse(data)
-      const itemsArray = itemsJson.geckos
+      const itemsArray = itemsJson.geckos.concat(itemsJson.misc,itemsJson.treats)
       let total = 0
       req.body.items.forEach(function(item) {
         const itemJson = itemsArray.find(function(i) {

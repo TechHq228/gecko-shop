@@ -24,9 +24,9 @@
       <div class="wrapper" data-visible="false">
         <nav class="nav-bar">
           <a class="nav-buttons" href="index.html">Home</a>
-          <a class="nav-buttons" href="/store">Store</a>
-          <a class="nav-buttons" href="">Accessories</a>
-          <a class="nav-buttons" href="">Treats</a>
+          <a class="nav-buttons">Store</a>
+          <a class="nav-buttons">Accessories</a>
+          <a class="nav-buttons">Treats</a>
           <a class="nav-buttons" href="">About</a>
         </nav>
         <div class="darkmode-outer" data-darkmode="false">
@@ -43,6 +43,34 @@
     <section class="store">
       <div class="store-flex">
         <% items.geckos.forEach(function(item){ %>
+        <figure class="store-item" data-item-id="<%= item.id %>">
+          <img src="img/<%= item.imgName %>" alt="geckus cutus" />
+          <caption>
+            <p class="title"><%= item.name %></p>
+            <p class="price">$<%= item.price / 100 %></p>
+          </caption>
+          <button class="store-item-button button">Add to Cart</button>
+        </figure>
+        <% }) %>
+      </div>
+    </section>
+    <section class="store store-misc">
+      <div class="store-flex">
+        <% items.misc.forEach(function(item){ %>
+        <figure class="store-item" data-item-id="<%= item.id %>">
+          <img src="img/<%= item.imgName %>" alt="geckus cutus" />
+          <caption>
+            <p class="title"><%= item.name %></p>
+            <p class="price">$<%= item.price / 100 %></p>
+          </caption>
+          <button class="store-item-button button">Add to Cart</button>
+        </figure>
+        <% }) %>
+      </div>
+    </section>
+    <section class="store store-treats">
+      <div class="store-flex">
+        <% items.treats.forEach(function(item){ %>
         <figure class="store-item" data-item-id="<%= item.id %>">
           <img src="img/<%= item.imgName %>" alt="geckus cutus" />
           <caption>

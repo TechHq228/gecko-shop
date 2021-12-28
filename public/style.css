@@ -182,8 +182,6 @@ img {
     top: 0;
     height: 100vh;
     max-width: 65%;
-    /*background-color: rgb(121, 121, 121);
-    */
     background-color: var(--clr-green-light);
     transform: translateX(100%);
     transition: 500ms ease-in-out;
@@ -192,6 +190,7 @@ img {
   .wrapper[data-visible="true"] {
     transform: translateX(0%);
     border-top-left-radius: 10vh 10vh;
+    box-shadow: -5px 0 50px rgba(0, 0, 0, 0.3);
   }
 
   .nav-bar {
@@ -345,9 +344,11 @@ img {
   }
 }
 
-/*
-.store-item-button:focus::after {
-  content: " ✓";
+/* === ACCESSORIES AND TREATS === */
+
+.store-misc,
+.store-treats {
+  display: none;
 }
 
 /* === BOTTOM CART === */
