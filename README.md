@@ -30,4 +30,4 @@ A little website WIP, simple shop
 ### Backend
 
 - [x] Connect Stripe
-- [ ] Apply ^ to all pages i.e. Accessories, Treats
+- [x] Apply ^ to all pages i.e. Accessories, Treats
