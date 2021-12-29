@@ -67,7 +67,6 @@ function addToCart(event) {
     buttonAnim();
     doNotTakeHalf();
     // testing()
-    
 }
 
 // GET DATA FOR ITEM
@@ -89,7 +88,6 @@ function addItem(title, price, imgSource, cartItems, quantityElement, id) {
   </div>`);
 //   totalCheck()
 plusMinus(cartItems, quantityElement)
-
 }
 
 // CHECK TOTAL
@@ -197,9 +195,9 @@ if (cartItself.clientHeight > 300) {
 
 // STRIPE 
 // function stripeProceed()
-var stripe = Stripe('pk_test_51KAItlAgCLt5TTg0rlpaPp7e95iymTXulkke1JS7GkZWPkDfg0srZuDRKu2PQnYGS5PgmAj17RU4E01EjRTgZVXf00nyq4P821')
 // CHECKOUT
 checkout()
+
 function checkout() {
     var buttonCheckout = document.querySelector(".bottom-cart-button");
     buttonCheckout.addEventListener('click', () => {
@@ -210,6 +208,8 @@ function checkout() {
         stripeHandler.open({
             amount: price
     }) */
+    // var stripe = Stripe('pk_test_51KAItlAgCLt5TTg0rlpaPp7e95iymTXulkke1JS7GkZWPkDfg0srZuDRKu2PQnYGS5PgmAj17RU4E01EjRTgZVXf00nyq4P821')
+
     var items = [];
         var cartItemContainer = document.getElementsByClassName('bottom-cart')[0];
         var cartItems = cartItemContainer.getElementsByClassName('cart-item');
@@ -225,25 +225,26 @@ function checkout() {
             })
             
         }
-        console.log(items)
+        console.log(items);
+
         fetch("http://localhost:3000/create-checkout-session", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json'
+                // 'Accept': 'application/json'
             },
             body: JSON.stringify({
-                // items: items
-                items: [
+                items: items,
+                /* items: [
                     { id: 1, quantity: 2 },
                     { id: 2, quantity: 4},
-                ],
+                ], */
             }),
-        }).then((res) => {
+        }).then(res => {
             if (res.ok) return res.json()
-            return res.json().then(json => Promise.reject(json))
+            return res.json().then(json => Promise.reject(json)) ;
         }).then(({ url }) => {
-            // window.location = url
+            setTimeout(function() {window.location = url}, 3000)
             console.log(url)
         }).then(function(/* data */) {
             // alert(data.message)
@@ -251,8 +252,7 @@ function checkout() {
             <div>
               <h2>Thank you for your purchase!</h2>
               <p>
-                Payment details have been sent to your E-mail and we're preparing your
-                geckos for safe transfer!
+                You are now being redirected to a trusted checkout page, don't worry :)
               </p>
             </div>
           </div>`)
