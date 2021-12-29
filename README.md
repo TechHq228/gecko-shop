@@ -30,4 +30,6 @@ A little website WIP, simple shop
 ### Backend
 
 - [x] Connect Stripe
+- [x] Connect not the oldest version of stripe
 - [x] Apply ^ to all pages i.e. Accessories, Treats
+- [x] Create a separate branch for *RUSSIA* payments
