@@ -1,31 +1,31 @@
 {
   "geckos": [
     {
-      "id": 1,
+      "id": 0,
       "name": "Cute Little Lizard",
       "price": 1000,
       "imgName": "gecko1.jpg"
     },
     {
-      "id": 2,
+      "id": 1,
       "name": "Cute Funny Lizard",
       "price": 799,
       "imgName": "gecko2.jpg"
     },
     {
-      "id": 3,
+      "id": 2,
       "name": "Cute Gaby Gecko",
       "price": 849,
       "imgName": "gecko3.jpg"
     },
     {
-      "id": 4,
+      "id": 3,
       "name": "Handsome Geckodile",
       "price": 1229,
       "imgName": "gecko4.jpg"
     },
     {
-      "id": 5,
+      "id": 4,
       "name": "Talkie Gecko",
       "price": 1999,
       "imgName": "gecko5.jpg"
@@ -33,19 +33,19 @@
   ],
   "misc": [
     {
-      "id": 6,
+      "id": 5,
       "name": "Terrarium",
       "price": 4999,
       "imgName": "misc1.jpg"
     },
     {
-      "id": 7,
+      "id": 6,
       "name": "Leash",
       "price": 499,
       "imgName": "misc2.jpg"
     },
     {
-      "id": 8,
+      "id": 7,
       "name": "Hoodie",
       "price": 1599,
       "imgName": "misc3.jpg"
@@ -53,17 +53,17 @@
   ],
   "treats": [
     {
-      "id": 9,
+      "id": 8,
       "name": "Common Fly",
       "price": 399,
       "imgName": "treat1.jpg"
     },{
-      "id": 10,
+      "id": 9,
       "name": "Silver Fly",
       "price": 999,
       "imgName": "treat2.png"
     },{
-      "id": 11,
+      "id": 10,
       "name": "Golden Fly",
       "price": 3999,
       "imgName": "treat3.jpg"

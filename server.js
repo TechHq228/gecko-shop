@@ -1,10 +1,9 @@
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
-}
+require('dotenv').config()
 
 const stripeSecretKey = process.env.STRIPE_SK
 const stripePublicKey = process.env.STRIPE_PK
 
+const e = require('express')
 const express = require('express')
 const app = express()
 const fs = require('fs')
@@ -27,34 +26,42 @@ app.get('/store', function(req, res) {
   })
 })
 
-app.post('/purchase', function(req, res) {
-  fs.readFile('items.json', function(error, data) {
-    if (error) {
-      res.status(500).end()
-    } else {
-      const itemsJson = JSON.parse(data)
-      const itemsArray = itemsJson.geckos.concat(itemsJson.misc,itemsJson.treats)
-      let total = 0
-      req.body.items.forEach(function(item) {
-        const itemJson = itemsArray.find(function(i) {
-          return i.id == item.id
-        })
-        total = total + itemJson.price * item.quantity
-      })
+const rawJson = fs.readFileSync('items.json', 'utf8')
+const parsedJson = JSON.parse(rawJson)
+const storeItems = parsedJson.geckos.concat(parsedJson.misc,parsedJson.treats)
+const storeMapItems = new Map(Object.entries(storeItems))
+console.log(storeMapItems)
 
-      stripe.charges.create({
-        amount: total,
-        source: req.body.stripeTokenId,
-        currency: 'usd'
-      }).then(function() {
-        console.log('Money-money-money in da pocket!')
-        res.json({ message: 'Successfully purchased items' })
-      }).catch(function() {
-        console.log('No money :(')
-        res.status(500).end()
-      })
-    }
-  })
+/* const storeItems = new Map([
+  [1, { price:1000, name: "Cute Little Lizard" }],
+  [2, { price: 799, name: "Cute Funny Lizard" }]
+]) */
+
+app.post("/create-checkout-session", async function(req, res) {
+    const session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      line_items: req.body.items.map(item => {
+        const storeItem = storeMapItems.get(item.id);
+        return {
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: storeItem.name,
+            },
+            unit_amount: storeItem.price,
+          },
+          quantity: item.quantity,
+        }
+      }),
+      success_url: `${process.env.SERVER_URL}/success.html`,
+      cancel_url: `${process.env.SERVER_URL}/cancel.html`,
+    })
+      res.json({url: session.url})
+      // res.redirect( 303, session.url)
+    /* .catch(e => {
+      res.status(500).json({ error: e.message })})
+     */
+    
 })
 
-app.listen(3000)
+app.listen(3000, console.log('Listening on 3000!'))
